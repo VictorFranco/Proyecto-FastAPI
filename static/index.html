@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastAPI Example</title>
+    <style>
+        body {
+            background-color: whitesmoke;
+            display: grid;
+            place-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: sans-serif;
+        }
+        form {
+            display: grid;
+            grid-template-columns: 60px 1fr;
+            justify-items: end;
+            gap: 15px;
+            padding: 20px;
+            border-radius: 4px;
+            background-color: lavender;
+            box-shadow: 0 0 0 1px;
+        }
+        button {
+            grid-column: 2 span;
+            width: 60%;
+            border: none;
+            margin: auto;
+            background-color: slateblue;
+            color: white;
+            font-size: 16px;
+            padding: 4px 0;
+            transition: all 0.2s;
+        }
+        button:hover {
+            background-color: darkslateblue;
+        }
+    </style>
+</head>
+<body>
+    <form method="get" action="/tests">
+        <label>Nombre:</label><input name="nombre" />
+        <label>Edad:</label><input name="edad" />
+        <button>Enviar</button>
+    </form>
+    <script>
+        const form = document.querySelector("form")
+        const sendData = async e => {
+            e.preventDefault()
+            const formData = new FormData(form)
+            const json = JSON.stringify(Object.fromEntries(formData))
+            const request = await fetch("http://localhost:8000/tests", {
+                method: "POST",
+                headers: {"Content-Type":"application/json"},
+                body: json
+            })
+            const data = await request.json()
+            console.log(data)
+        }
+        form.addEventListener("submit", sendData)
+    </script>
+</body>
+</html>
