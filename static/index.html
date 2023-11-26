@@ -47,17 +47,18 @@
     </form>
     <script>
         const form = document.querySelector("form")
+        const apiServer = window.location.origin
         const sendData = async e => {
             e.preventDefault()
             const formData = new FormData(form)
             const json = JSON.stringify(Object.fromEntries(formData))
-            const request = await fetch("http://localhost:8000/tests", {
+            const request = await fetch(`${apiServer}/tests`, {
                 method: "POST",
                 headers: {"Content-Type":"application/json"},
                 body: json
             })
             const data = await request.json()
-            console.log(data)
+            alert(JSON.stringify(data))
         }
         form.addEventListener("submit", sendData)
     </script>
