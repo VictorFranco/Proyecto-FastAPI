@@ -6,3 +6,6 @@
 A simple web application developed using FastAPI and vanilla JavaScript.
 
 ![Home Page](https://i.imgur.com/KanGQLr.png)
+
+## LICENSE
+[MIT](LICENSE "LICENSE")
